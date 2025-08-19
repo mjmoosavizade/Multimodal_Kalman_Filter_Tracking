@@ -1,0 +1,92 @@
+# Build directories
+/data
+/build
+/.vscode
+/.git
+
+# Additional build directories
+bin/
+lib/
+
+# Compiled Object files
+*.o
+*.obj
+
+# Executables
+MultimodalKalmanFilterTracking
+simple_demo
+run_tests
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+*.cmake
+
+# IDE files
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Log files
+*.log
+
+# Data files (typically large)
+datasets/
+*.bag
+*.pcd
+*.ply
+
+# Model files (typically large)
+models/
+*.onnx
+*.pb
+*.weights
+*.cfg
+
+# Output files
+output/
+results/
+*.png
+*.jpg
+*.jpeg
+*.mp4
+*.avi
+
+# Temporary files
+tmp/
+temp/
+
+# Python cache (if any Python scripts)
+__pycache__/
+*.pyc
+*.pyo
+
+# Documentation generated files
+docs/html/
+docs/latex/
+*.pdf
+
+# Package files
+*.deb
+*.rpm
+*.tar.gz
+*.zip
+
+# Configuration files with sensitive data
+config/local_*
+*.secret
+
+# Backup files
+*.bak
+*.backup

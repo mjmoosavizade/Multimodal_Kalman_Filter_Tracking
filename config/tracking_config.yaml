@@ -1,0 +1,100 @@
+# Multimodal Kalman Filter Tracking Configuration
+
+# Kalman Filter Parameters
+kalman_filter:
+  # Process noise parameters
+  acceleration_noise_std: 2.0  # m/s²
+  
+  # Initial covariance values
+  initial_position_variance: 1.0    # m²
+  initial_velocity_variance: 10.0   # (m/s)²
+  initial_acceleration_variance: 100.0  # (m/s²)²
+
+# Measurement Noise Covariances
+measurement_noise:
+  # Camera measurement noise (pixels)
+  camera:
+    u_variance: 25.0      # pixels²
+    v_variance: 25.0      # pixels²
+    width_variance: 100.0 # pixels²
+    height_variance: 100.0 # pixels²
+  
+  # LiDAR measurement noise (meters)
+  lidar:
+    x_variance: 0.01  # m²
+    y_variance: 0.01  # m²
+    z_variance: 0.01  # m²
+
+# Multi-Object Tracking Parameters
+tracking:
+  max_tracks: 50
+  association_threshold: 5.0  # Distance threshold for data association
+  max_consecutive_misses: 5   # Max misses before track deletion
+  min_detection_confidence: 0.3
+  min_track_confidence: 0.1
+
+# Perception Module Parameters
+perception:
+  # Camera Detection
+  camera:
+    confidence_threshold: 0.5
+    nms_threshold: 0.4
+    input_width: 416
+    input_height: 416
+  
+  # LiDAR Detection
+  lidar:
+    voxel_size: 0.1           # meters
+    cluster_tolerance: 0.5    # meters
+    min_cluster_size: 10      # points
+    max_cluster_size: 2500    # points
+    
+    # Crop box for region of interest
+    crop_box:
+      min_x: -50.0  # meters
+      max_x: 50.0   # meters
+      min_y: -50.0  # meters
+      max_y: 50.0   # meters
+      min_z: -3.0   # meters
+      max_z: 3.0    # meters
+
+# Visualization Parameters
+visualization:
+  # 2D Visualization
+  bbox_thickness: 2
+  text_thickness: 1
+  text_scale: 0.6
+  trajectory_length: 10
+  show_velocity_vectors: true
+  show_uncertainty_ellipse: true
+  prediction_time: 1.0  # seconds
+  
+  # 3D Visualization
+  enable_3d_viewer: true
+  point_size: 1
+  coordinate_system_size: 1.0
+
+# Performance Parameters
+performance:
+  max_processing_fps: 30.0
+  enable_profiling: true
+  log_statistics: true
+
+# Dataset Parameters
+dataset:
+  # KITTI specific parameters
+  kitti:
+    sequence_length: 1000  # Max frames to process (-1 for all)
+    start_frame: 0
+    camera_id: 0  # Which camera to use (0-3)
+    
+  # File paths (relative to dataset root)
+  paths:
+    images: "image_00/data"
+    velodyne: "velodyne_points/data"
+    oxts: "oxts/data"
+    calibration: "calib.txt"
+    timestamps:
+      camera: "image_00/timestamps.txt"
+      velodyne: "velodyne_points/timestamps.txt"
+      oxts: "oxts/timestamps.txt"

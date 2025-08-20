@@ -223,6 +223,12 @@ private:
      * @return Class name string
      */
     std::string getClassName(int class_id);
+
+    /**
+     * @brief Add legend to visualization image
+     * @param image Image to add legend to
+     */
+    void addLegend(cv::Mat& image);
 };
 
 /**

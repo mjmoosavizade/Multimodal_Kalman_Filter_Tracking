@@ -421,6 +421,38 @@ std::string Visualizer::getClassName(int class_id) {
     }
 }
 
+void Visualizer::addLegend(cv::Mat& image) {
+    int legend_x = 20;
+    int legend_y = 80;
+    int line_height = 25;
+    
+    // Background for legend
+    cv::Rect legend_bg(legend_x - 10, legend_y - 10, 200, 120);
+    cv::Mat overlay = image.clone();
+    cv::rectangle(overlay, legend_bg, cv::Scalar(0, 0, 0), -1);
+    cv::addWeighted(image, 0.7, overlay, 0.3, 0, image);
+    
+    // Legend title
+    cv::putText(image, "Legend:", cv::Point(legend_x, legend_y), 
+               cv::FONT_HERSHEY_SIMPLEX, 0.6, cv::Scalar(255, 255, 255), 2);
+    
+    // Track indicators
+    cv::circle(image, cv::Point(legend_x + 15, legend_y + line_height), 5, cv::Scalar(0, 255, 0), -1);
+    cv::putText(image, "Active Track", cv::Point(legend_x + 30, legend_y + line_height + 5), 
+               cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(255, 255, 255), 1);
+    
+    // Detection indicators
+    cv::rectangle(image, cv::Rect(legend_x + 10, legend_y + line_height * 2 - 5, 10, 8), 
+                 cv::Scalar(128, 128, 128), 1);
+    cv::putText(image, "Detection", cv::Point(legend_x + 30, legend_y + line_height * 2 + 5), 
+               cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(255, 255, 255), 1);
+    
+    // Prediction indicators
+    cv::circle(image, cv::Point(legend_x + 15, legend_y + line_height * 3), 3, cv::Scalar(255, 255, 0), 2);
+    cv::putText(image, "Prediction", cv::Point(legend_x + 30, legend_y + line_height * 3 + 5), 
+               cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(255, 255, 255), 1);
+}
+
 // PerformanceProfiler Implementation
 PerformanceProfiler::PerformanceProfiler() {
 }

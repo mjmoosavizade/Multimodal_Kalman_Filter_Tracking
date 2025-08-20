@@ -62,9 +62,40 @@ endif()
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE tracking_lib)
 
+# Create demo visualization executable
+add_executable(demo_visualization demo_visualization.cpp)
+target_link_libraries(demo_visualization
+    PRIVATE
+    tracking_lib
+    ${OpenCV_LIBS}
+    Eigen3::Eigen
+)
+
+target_include_directories(demo_visualization PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${OpenCV_INCLUDE_DIRS}
+    ${EIGEN3_INCLUDE_DIR}
+)
+
+# Real image demo executable
+add_executable(demo_real_images demo_visualization_real.cpp)
+
+target_link_libraries(demo_real_images
+    tracking_lib
+    ${OpenCV_LIBS}
+    Eigen3::Eigen
+)
+
+target_include_directories(demo_real_images PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${OpenCV_INCLUDE_DIRS}
+    ${EIGEN3_INCLUDE_DIR}
+)
+
 # Compiler-specific options
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(demo_visualization PRIVATE -Wall -Wextra -Wpedantic)
 endif()
 
 # Enable testing
